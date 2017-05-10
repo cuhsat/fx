@@ -32,16 +32,16 @@
 static unsigned char s[256], x, y, _;
 
 /*
- * fumbled xor
+ * Fumbled XOR
  */
-static void fumble(unsigned char byte) {
+static void fx(unsigned char byte) {
     y += x ^ byte;
 
     SWAP(s[x], s[y])
 }
 
 /*
- * key scheduling algorithm
+ * Key Scheduling Algorithm
  */
 static void ksa(unsigned char *key, size_t length) {
     x = sizeof(s) - 1; y = 0;
@@ -51,21 +51,21 @@ static void ksa(unsigned char *key, size_t length) {
     } while (x-- > 0);
 
     do {
-        fumble(key[x % length]);
+        fx(key[x % length]);
     } while (x-- > 0);
 }
 
 /*
- * pseudorandom number generator
+ * Pseudo-Random Number Generator
  */
 static unsigned char prng() {
-    fumble(s[x++]);
+    fx(s[x++]);
 
     return s[x ^ y];
 }
 
 /*
- * main
+ * Main
  */
 int main(int argc, char **argv) {
     if (argc < 2) {
@@ -75,8 +75,9 @@ int main(int argc, char **argv) {
 
     ksa((unsigned char *)argv[1], strlen(argv[1]));
 
-    while (!feof(stdin))
+    while (!feof(stdin)) {
         fputc(fgetc(stdin) ^ prng(), stdout);
+    }
 
     return 0;
 }
