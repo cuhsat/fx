@@ -10,4 +10,4 @@ $ STDIN | fx KEY > STDOUT
 
 License
 -------
-Release into the [Public Domain](LICENSE).
+Released into the [Public Domain](LICENSE).
