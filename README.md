@@ -1,8 +1,6 @@
-Fumbled-XOR
+fumbled-XOR
 ===========
-An implementation of `fumbled-XOR` in ANSI C.
-
-THIS WANNABE CIPHER IS STRICTLY EXPERIMENTAL.
+A strictly experimental cipher in ANSI C.
 
 Usage
 -----

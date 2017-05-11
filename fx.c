@@ -27,24 +27,25 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SWAP(x, y) (_) = (x); (x) = (y); (y) = (_);
+#define SWAP3(x, y, z) (_) = (x); (x) = (y); (y) = (z); (z) = (_);
 
-static unsigned char s[256], x, y, _;
+static unsigned char s[256], x, y, z, _;
 
 /*
  * Fumbled XOR
  */
 static void fx(unsigned char byte) {
-    y += x ^ byte;
+    y = x ^ byte;
+    z = x ^ (y + z);
 
-    SWAP(s[x], s[y])
+    SWAP3(s[x], s[y], s[z])
 }
 
 /*
  * Key Scheduling Algorithm
  */
 static void ksa(unsigned char *key, size_t length) {
-    x = sizeof(s) - 1; y = 0;
+    x = sizeof(s) - 1; y = z = 0;
 
     do {
         s[x] = x;
@@ -61,7 +62,7 @@ static void ksa(unsigned char *key, size_t length) {
 static unsigned char prng() {
     fx(s[x++]);
 
-    return s[x ^ y];
+    return s[x ^ y ^ z];
 }
 
 /*
@@ -69,7 +70,7 @@ static unsigned char prng() {
  */
 int main(int argc, char **argv) {
     if (argc < 2) {
-        fprintf(stderr, "usage: fx KEY\n");
+        fprintf(stderr, "usage: fx key\n");
         return 1;
     }
 
