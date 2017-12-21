@@ -1,6 +1,6 @@
 fumbled-XOR
 ===========
-A strictly experimental cipher in ANSI C.
+A strictly experimental stream cipher in ANSI C.
 
 Usage
 -----
