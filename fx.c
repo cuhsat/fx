@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SWAP3(x, y, z) (_) = (x); (x) = (y); (y) = (z); (z) = (_);
+#define FUMBLE(x, y, z) (_) = (x); (x) = (y); (y) = (z); (z) = (_);
 
 static unsigned char s[256], x, y, z, _;
 
@@ -38,7 +38,7 @@ static void fx(unsigned char byte) {
     y = x ^ byte;
     z = x ^ (y + z);
 
-    SWAP3(s[x], s[y], s[z])
+    FUMBLE(s[x], s[y], s[z])
 }
 
 /*
